@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hxg.settlement.mysql.mapper.AppUserMapper">
+  <resultMap id="BaseResultMap" type="com.hxg.settlement.mysql.persistence.AppUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="portrait_url" jdbcType="VARCHAR" property="portraitUrl" />
+    <result column="address_id" jdbcType="INTEGER" property="addressId" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
+    <result column="birth_date" jdbcType="TIMESTAMP" property="birthDate" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+    <result column="idcard_no" jdbcType="VARCHAR" property="idcardNo" />
+    <result column="level_sequence" jdbcType="INTEGER" property="levelSequence" />
+    <result column="level_score" jdbcType="INTEGER" property="levelScore" />
+    <result column="level_points" jdbcType="INTEGER" property="levelPoints" />
+    <result column="height" jdbcType="INTEGER" property="height" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="symptom_type" jdbcType="VARCHAR" property="symptomType" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="career" jdbcType="VARCHAR" property="career" />
+    <result column="marriage_info" jdbcType="VARCHAR" property="marriageInfo" />
+    <result column="education_level" jdbcType="VARCHAR" property="educationLevel" />
+    <result column="wechat" jdbcType="VARCHAR" property="wechat" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="profile_complete_percent" jdbcType="TINYINT" property="profileCompletePercent" />
+    <result column="is_brm" jdbcType="BIT" property="isBrm" />
+    <result column="brmid" jdbcType="VARCHAR" property="brmid" />
+    <result column="passwd" jdbcType="VARCHAR" property="passwd" />
+    <result column="wx_openid" jdbcType="VARCHAR" property="wxOpenid" />
+    <result column="qq_openid" jdbcType="VARCHAR" property="qqOpenid" />
+    <result column="id_front_url" jdbcType="VARCHAR" property="idFrontUrl" />
+    <result column="id_back_url" jdbcType="VARCHAR" property="idBackUrl" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="consult_display_name" jdbcType="VARCHAR" property="consultDisplayName" />
+  </resultMap>
+</mapper>
