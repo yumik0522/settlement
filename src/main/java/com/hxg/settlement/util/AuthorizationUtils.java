@@ -41,7 +41,6 @@ public class AuthorizationUtils {
 	 */
 	public static String generateAppTokenStr(AppToken appToken) {
 		Map<String, Object> claims = new HashMap<>();
-//		claims.put("mobile", mobile);
 		Date now = new Date();
 		Date expireDay = null;
 		try {

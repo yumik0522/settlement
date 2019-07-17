@@ -1,9 +1,12 @@
 package com.hxg.settlement.web.vo;
 
-import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
-public class UserInfo implements Serializable {
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+public class UserInfo implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -62,4 +65,34 @@ public class UserInfo implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

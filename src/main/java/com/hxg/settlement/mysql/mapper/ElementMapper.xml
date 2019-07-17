@@ -28,4 +28,18 @@
     <result column="attr7" jdbcType="VARCHAR" property="attr7" />
     <result column="attr8" jdbcType="VARCHAR" property="attr8" />
   </resultMap>
+  
+  <select id="selectAuthorityElementByUserId" resultMap="BaseResultMap">
+    SELECT DISTINCT t.code,t.type,t.name,t.uri,t.method,m.title as menu_id FROM base_resource_authority ra
+        INNER JOIN base_element t
+       ON ra.resource_id = t.id
+        AND ra.authority_id IN (
+          SELECT group_id FROM base_group_member WHERE user_id = #{userId}
+          UNION SELECT group_id FROM base_group_leader WHERE user_id = #{userId}
+        )
+        AND ra.authority_type = 'group'
+        AND ra.resource_type = 'button'
+        INNER JOIN base_menu m
+       ON t.menu_id = m.id
+  </select>
 </mapper>

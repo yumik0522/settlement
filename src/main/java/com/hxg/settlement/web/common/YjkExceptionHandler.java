@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.hxg.settlement.constant.CommonConstants;
 import com.hxg.settlement.web.common.exception.AppTokenIllegalException;
 import com.hxg.settlement.web.common.exception.ParameterIllegalException;
+import com.hxg.settlement.web.common.exception.SettlementIllegaException;
 
 @RestControllerAdvice
 public class YjkExceptionHandler {
@@ -17,6 +18,15 @@ public class YjkExceptionHandler {
 	@ExceptionHandler(ParameterIllegalException.class)
 	public ApiResponse parameterIllegalExceptionHandler(ParameterIllegalException e) {
 		ApiResponse apiResponse = new ApiResponse(CommonConstants.CODE_ILLEGAL_ARGUMENT, e.getMessage());
+		if (e.getData() != null) {
+			apiResponse.setData(e.getData());
+		}
+		return apiResponse;
+	}
+	
+	@ExceptionHandler(SettlementIllegaException.class)
+	public ApiResponse SettlementIllegalExceptionHandler(SettlementIllegaException e) {
+		ApiResponse apiResponse = new ApiResponse(CommonConstants.CODE_SERVER_ERROR, e.getMessage());
 		if (e.getData() != null) {
 			apiResponse.setData(e.getData());
 		}

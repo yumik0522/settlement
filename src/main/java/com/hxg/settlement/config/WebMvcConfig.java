@@ -8,13 +8,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import com.hxg.settlement.web.common.interceptor.AppTokenInterceptor;
 
 @Configuration
-public class MvcConfig extends WebMvcConfigurationSupport {
+public class WebMvcConfig extends WebMvcConfigurationSupport {
   
   /**
    * 配置静态资源,避免静态资源请求被拦截
    */
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
-      registry.addResourceHandler("/vue/**").addResourceLocations("classpath:/vue/");
+      registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
       super.addResourceHandlers(registry);
   }
   

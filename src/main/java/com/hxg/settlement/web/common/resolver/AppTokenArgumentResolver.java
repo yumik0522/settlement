@@ -10,6 +10,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import com.alibaba.fastjson.JSON;
 import com.hxg.settlement.util.AuthorizationUtils;
 import com.hxg.settlement.web.common.exception.ParameterIllegalException;
 
@@ -38,7 +39,7 @@ public class AppTokenArgumentResolver implements HandlerMethodArgumentResolver {
 				log.error("非法APP请求,认证参数不合法");
 				throw new ParameterIllegalException("登录已过期");
 			}
-			token = new AppToken(Integer.valueOf(oSub.toString()));
+			token = JSON.parseObject(oSub.toString(), AppToken.class);
 			webRequest.removeAttribute("appauth_sub", NativeWebRequest.SCOPE_REQUEST);
 		} else {
 			// 服务模式
@@ -47,7 +48,7 @@ public class AppTokenArgumentResolver implements HandlerMethodArgumentResolver {
 				log.error("非法APP请求,认证参数不合法");
 				throw new ParameterIllegalException("登录已过期");
 			}
-			token = new AppToken(Integer.valueOf(strSub));
+			token = JSON.parseObject(strSub, AppToken.class);
 		}
 		return token;
 	}
