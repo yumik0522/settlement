@@ -36,4 +36,8 @@ public class MenuBiz {
 		return menuMapper.selectAll();
 	}
 
+	public List<Menu> selectUserAuthoritySystemByUserId(Integer userId) {
+		return menuMapper.selectUserAuthoritySystemByUserId(userId);
+	}
+
 }

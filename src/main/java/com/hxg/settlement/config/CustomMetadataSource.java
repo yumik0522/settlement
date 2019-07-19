@@ -13,6 +13,7 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
+import com.alibaba.fastjson.JSON;
 import com.hxg.settlement.service.PermissionService;
 import com.hxg.settlement.util.AuthorizationUtils;
 import com.hxg.settlement.web.common.resolver.AppToken;
@@ -35,8 +36,9 @@ public class CustomMetadataSource implements FilterInvocationSecurityMetadataSou
     	}
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
         List<PermissionInfo> allPermission = permissionService.getAllPermissionByUserid(appToken.getUserid());
+        System.out.println(JSON.toJSONString(allPermission));
         for (PermissionInfo permissionInfo : allPermission) {
-            if (antPathMatcher.match(permissionInfo.getUri()+"?*", requestUrl)) {
+            if (antPathMatcher.match(permissionInfo.getUri(), requestUrl)||antPathMatcher.match(permissionInfo.getUri()+"?*", requestUrl)) {
                 return SecurityConfig.createList("ROLE_ANONYMOUS");
             }
         }

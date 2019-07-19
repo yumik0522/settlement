@@ -7,5 +7,7 @@ import tk.mybatis.mapper.common.Mapper;
 
 public interface MenuMapper extends Mapper<Menu> {
 
-	List<Menu> selectAuthorityMenuByUserId(Integer userid);
+	List<Menu> selectAuthorityMenuByUserId(Integer userId);
+
+	List<Menu> selectUserAuthoritySystemByUserId(Integer userId);
 }

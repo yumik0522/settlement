@@ -1,6 +1,6 @@
 (function(){
     requirejs.config({
-        baseUrl: "/vue/dist",
+        baseUrl: "dist",
         paths:{
             "promise":"js/q",
             "vue":"js/vue",

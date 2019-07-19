@@ -9,8 +9,7 @@ var qs = function (data) {
 
 var token = sessionStorage.getItem("token");
 if(!token) {
-	//location.href = '/login';
-	token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwianRpIjoiMjgxMGVmNWJhOGRmNDhlMzllNDExM2I2MzIyZWNiYTciLCJleHAiOjE1NDAwNTEyMDAsImlhdCI6MTUzODQwNTMxNX0.rqmqdllv79Ks0kfJDbAemZOoX8qfprPuVEInBlIVmko";
+	token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJ1c2VyaWRcIjoxfSIsImp0aSI6ImFkOTg2ZGQ2MTVkMzQ3Mzc5ZmQ1MWVlZDViNTkwYzE4IiwiZXhwIjoxNTY2MDU3NjAwLCJpYXQiOjE1NjM1MjY2Nzh9.Fu7F1IhizcRWyjp3Zrvho2mMJC9y9k6FjlYyZea4S3I";
 }
 var AUTH_TOKEN = token?"Bearer "+token:"";   
 axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;

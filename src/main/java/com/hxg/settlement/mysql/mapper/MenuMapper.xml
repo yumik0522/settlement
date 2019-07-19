@@ -46,4 +46,17 @@
     AND ra.resource_type = 'menu'
     ORDER BY t.id
   </select>
+  
+   <select id="selectUserAuthoritySystemByUserId" resultMap="BaseResultMap">
+        select distinct t.* from base_resource_authority ra
+        inner join base_menu t
+        on ra.resource_id = t.id
+        and ra.authority_id in (
+        select group_id from base_group_member where user_id = #{userId}
+        union select group_id from base_group_leader where user_id = #{userId}
+        )
+        and ra.authority_type = 'group'
+        and ra.resource_type = 'menu'
+        where t.parent_id = -1
+    </select>
 </mapper>
