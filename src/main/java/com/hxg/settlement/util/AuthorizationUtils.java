@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.hxg.settlement.web.common.resolver.AppToken;
 
 import io.jsonwebtoken.Claims;
@@ -56,9 +57,9 @@ public class AuthorizationUtils {
 	/**
 	 * 验证统一认证数据合法性
 	 * @param request
-	 * @return 0=校验失败,1=校验成功,-1=token已过期
+	 * @return 用户id
 	 */
-	public static Integer verifyAppToken(HttpServletRequest request) {
+	public static AppToken verifyAppToken(HttpServletRequest request) {
 		String headerAuthorization = request.getHeader("Authorization"); // 获取认证数据
 		if (StringUtils.isNotBlank(headerAuthorization) && (headerAuthorization.startsWith("Bearer")) && (headerAuthorization.length()>10)) {
 			String jws = headerAuthorization.substring(7);
@@ -68,18 +69,24 @@ public class AuthorizationUtils {
             } catch (SignatureException se) {
                 log.error("Authorization:"+headerAuthorization);
                 log.error("verifyAuthorizationTicket Exception:"+se.getMessage(), se);
-                return 0;
+                return null;
             } catch (ExpiredJwtException eje) {
             	log.warn("token已过期");
-            	return -1;
+            	return null;
             }
+			log.info(clms.getSubject());
 			request.setAttribute(TOKEN_KEY, clms.getSubject());
+			AppToken appToken = JSONObject.parseObject(clms.getSubject(),AppToken.class);
+			return appToken;
 		}
-		return 1;
+		return null;
 	}
 
 	public static void main(String[] args) {
-		
+		AppToken appToken = new AppToken();
+		appToken.setUserid(1);
+		String token = generateAppTokenStr(appToken);
+		System.out.println(token);
 	}
 
 }

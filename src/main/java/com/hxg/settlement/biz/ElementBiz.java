@@ -19,4 +19,9 @@ public class ElementBiz {
 		return elementMapper.selectAuthorityElementByUserId(userid);
 	}
 
+
+	public List<Element> getAllElementPermissions() {
+		return elementMapper.selectAllElementPermissions();
+	}
+
 }

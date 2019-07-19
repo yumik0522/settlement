@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.hxg.settlement.service.PermissionService;
+import com.hxg.settlement.web.common.exception.SettlementIllegaException;
 import com.hxg.settlement.web.common.resolver.AppToken;
 import com.hxg.settlement.web.vo.PermissionInfo;
 import com.hxg.settlement.web.vo.UserInfo;
@@ -24,10 +25,10 @@ public class AuthBiz {
 		UserInfo info = permissionService.validate(username, password);
 		
         if (StringUtils.isEmpty(info.getId())) {
-        	throw new RuntimeException("用户不存在或账户密码错误!");
+        	throw new SettlementIllegaException("用户不存在或账户密码错误!");
         }
         
-        List<PermissionInfo> permissionList = permissionService.getAllPermission(info.getId());
+        List<PermissionInfo> permissionList = permissionService.getAllPermission();
         
         AppToken appToken = new AppToken();
         

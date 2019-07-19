@@ -39,12 +39,23 @@ public class PermissionService {
 	 * @param userid
 	 * @return
 	 */
-	public List<PermissionInfo> getAllPermission(Integer userId) {
+	public List<PermissionInfo> getAllPermissionByUserid(Integer userId) {
 		
 		List<Menu> menus = menuBiz.selectAuthorityMenuByUserId(userId);
         List<PermissionInfo> result = new ArrayList<PermissionInfo>();
         menu2permission(menus, result);
         List<Element> elements = elementBiz.selectAuthorityElementByUserId(userId);
+        element2permission(result, elements);
+		
+		return result;
+    }
+	
+	public List<PermissionInfo> getAllPermission() {
+		
+		List<Menu> menus = menuBiz.selectListAll();
+        List<PermissionInfo> result = new ArrayList<PermissionInfo>();
+        menu2permission(menus, result);
+        List<Element> elements = elementBiz.getAllElementPermissions();
         element2permission(result, elements);
 		
 		return result;

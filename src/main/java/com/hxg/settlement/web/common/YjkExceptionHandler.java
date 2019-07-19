@@ -35,7 +35,7 @@ public class YjkExceptionHandler {
 	
 	@ExceptionHandler(AppTokenIllegalException.class)
 	public ApiResponse appTokenIllegalException(AppTokenIllegalException e) {
-		log.info("进入YjkExceptionHandler *****************");
+		e.printStackTrace();
 		return new ApiResponse(CommonConstants.CODE_ILLEGAL_APPTOKEN, e.getMessage());
 	}
 	

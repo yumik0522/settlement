@@ -8,4 +8,6 @@ import tk.mybatis.mapper.common.Mapper;
 public interface ElementMapper extends Mapper<Element> {
 
 	List<Element> selectAuthorityElementByUserId(Integer userid);
+
+	List<Element> selectAllElementPermissions();
 }

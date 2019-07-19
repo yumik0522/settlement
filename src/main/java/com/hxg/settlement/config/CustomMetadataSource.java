@@ -3,6 +3,8 @@ package com.hxg.settlement.config;
 import java.util.Collection;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -11,8 +13,10 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
-import com.hxg.settlement.mysql.persistence.Menu;
 import com.hxg.settlement.service.PermissionService;
+import com.hxg.settlement.util.AuthorizationUtils;
+import com.hxg.settlement.web.common.resolver.AppToken;
+import com.hxg.settlement.web.vo.PermissionInfo;
 
 /**
  * Created by sang on 2017/12/28.
@@ -24,20 +28,18 @@ public class CustomMetadataSource implements FilterInvocationSecurityMetadataSou
     AntPathMatcher antPathMatcher = new AntPathMatcher();
     @Override
     public Collection<ConfigAttribute> getAttributes(Object o) {
+    	HttpServletRequest request = ((FilterInvocation) o).getRequest();
+    	AppToken appToken  = AuthorizationUtils.verifyAppToken(request);
+    	if(appToken==null) {
+    		return SecurityConfig.createList("ROLE_LOGIN");
+    	}
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
-        List<Menu> allMenu = permissionService.getAllMenu();
-//        for (Menu menu : allMenu) {
-//            if (antPathMatcher.match(menu.getUrl(), requestUrl)
-//                    &&menu.getRoles().size()>0) {
-//                List<Role> roles = menu.getRoles();
-//                int size = roles.size();
-//                String[] values = new String[size];
-//                for (int i = 0; i < size; i++) {
-//                    values[i] = roles.get(i).getName();
-//                }
-//                return SecurityConfig.createList(values);
-//            }
-//        }
+        List<PermissionInfo> allPermission = permissionService.getAllPermissionByUserid(appToken.getUserid());
+        for (PermissionInfo permissionInfo : allPermission) {
+            if (antPathMatcher.match(permissionInfo.getUri()+"?*", requestUrl)) {
+                return SecurityConfig.createList("ROLE_ANONYMOUS");
+            }
+        }
         //没有匹配上的资源，都是登录访问
         return SecurityConfig.createList("ROLE_LOGIN");
     }

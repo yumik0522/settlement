@@ -42,4 +42,10 @@
         INNER JOIN base_menu m
        ON t.menu_id = m.id
   </select>
+  
+  <select id="selectAllElementPermissions" resultMap="BaseResultMap">
+        SELECT DISTINCT t.code,t.type,t.name,t.uri,t.method,m.title as menu_id FROM base_element t
+        INNER JOIN base_menu m
+        ON t.menu_id = m.id
+  </select>
 </mapper>

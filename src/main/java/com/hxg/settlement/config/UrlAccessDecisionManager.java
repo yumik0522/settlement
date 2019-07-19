@@ -27,9 +27,9 @@ public class UrlAccessDecisionManager implements AccessDecisionManager {
             if ("ROLE_LOGIN".equals(needRole)) {
                 if (auth instanceof AnonymousAuthenticationToken) {
                     throw new BadCredentialsException("未登录");
-                } else
-                    return;
-            }
+                } 
+                return;
+            } 
             //当前用户所具有的权限
             Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
             for (GrantedAuthority authority : authorities) {

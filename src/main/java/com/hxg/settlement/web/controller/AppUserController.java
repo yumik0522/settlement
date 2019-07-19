@@ -16,13 +16,13 @@ import com.hxg.settlement.web.common.exception.ParameterIllegalException;
 import com.hxg.settlement.web.common.resolver.AppToken;
 
 @RestController
-@RequestMapping("/appUser")
+@RequestMapping("/admin")
 public class AppUserController {
 	
 	@Autowired
 	private AppUserBiz appUserBiz;
 	
-	@RequestMapping(value = "/getAppUserInfo", method = RequestMethod.GET)
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public ApiResponse getAppUserInfo(AppToken appToken) {
 		
 		Integer id = appToken.getUserid();
